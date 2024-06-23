@@ -36,12 +36,14 @@ const Nav = () => {
         <div className="sm:flex hidden">
           {session?.user ? (
             <div className="flex gap-3 md:gap-5">
-              <Image
-                src={session?.user.image}
-                width={37}
-                height={37}
-                alt="user_image"
-              ></Image>
+              <Link href="/profile">
+                <Image
+                  src={session?.user.image}
+                  width={37}
+                  height={37}
+                  alt="user_image"
+                ></Image>
+              </Link>
               <Link href="/create-prompt" className="black_btn">
                 Create Post
               </Link>
@@ -97,7 +99,7 @@ const Nav = () => {
             <div className="absolute top-full right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 z-10">
               <div className="flex flex-col gap-2 p-2">
                 <Link
-                  href="/"
+                  href="/profile"
                   onClick={() => {
                     setIsMenuOpen(false);
                   }}
