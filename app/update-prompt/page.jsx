@@ -1,10 +1,11 @@
 "use client";
 
+import React, { Suspense, useEffect, useState } from "react";
 import Form from "@components/Form";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-const page = () => {
+
+const UpdatePromptPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
@@ -16,6 +17,7 @@ const page = () => {
     prompt: "",
     tag: "",
   });
+
   useEffect(() => {
     const fetchPrompt = async () => {
       try {
@@ -33,11 +35,14 @@ const page = () => {
           );
         }
       } catch (error) {
-        console.error("Error Updating prompt:", error);
+        console.error("Error fetching prompt:", error);
       }
     };
-    fetchPrompt();
-  }, []);
+    if (promptId) {
+      fetchPrompt();
+    }
+  }, [promptId]);
+
   const updatePrompt = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -55,13 +60,16 @@ const page = () => {
       } else {
         const errorText = await response.text();
         throw new Error(
-          `Failed to Update prompt: ${response.status} - ${errorText}`
+          `Failed to update prompt: ${response.status} - ${errorText}`
         );
       }
     } catch (error) {
-      console.error("Error Updating prompt:", error);
+      console.error("Error updating prompt:", error);
+    } finally {
+      setSubmitting(false);
     }
   };
+
   return (
     <Form
       handleSubmit={updatePrompt}
@@ -69,8 +77,14 @@ const page = () => {
       type="update"
       setPost={setPost}
       submitting={submitting}
-    ></Form>
+    />
   );
 };
 
-export default page;
+const SuspendedUpdatePromptPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <UpdatePromptPage />
+  </Suspense>
+);
+
+export default SuspendedUpdatePromptPage;
