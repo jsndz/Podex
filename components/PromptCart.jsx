@@ -21,7 +21,7 @@ const PromptCart = ({ post, handleTagClick }) => {
   return (
     <div
       className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
-      onClick={handleProfile}
+      // onClick={handleProfile}
     >
       <Image
         src={post?.creator?.image}
