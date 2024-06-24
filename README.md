@@ -1,7 +1,11 @@
-## todo:
+## Hosted On:
 
-useRoutr use Session
-Form form component
+https://podex-rho.vercel.app/
+
+the app is half baked
+So dont expect much
+Will make it better cause i just implemented basic app.
+Have a different idea for this.
 
 ## Getting Started
 
@@ -21,4 +25,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-## Deploy on Vercel
+\
